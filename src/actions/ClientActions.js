@@ -38,11 +38,13 @@ export const clientsFetch = () => {
 }
 
 //this firebase call edits a specific key. pay attention to the uid
-export const noteSave = ( name, notes, uid ) => {
+export const noteSave = ({ name, notes, uid }) => {
   const { currentUser } = firebase.auth()
   return () => {
     firebase.database().ref(`/users/${currentUser.uid}/client/${uid}`)
-      .set({ notes })
-      .then(() => console.log('saved'))
+      .set({ name, notes })
+      .then(() => console.log('hello'))
+
   }
+
 }

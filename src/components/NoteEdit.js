@@ -15,7 +15,7 @@ class NoteEdit extends Component {
   onButtonPress() {
     const { name, notes } = this.props;
 
-    this.props.noteSave({ name, notes, uid: this.props.client.uid })
+    this.props.noteSave({ name, notes, uid: this.props.client.uid})
   }
 
 
