@@ -1,0 +1,3 @@
+rootProject.name = 'Bellatorum_Mobile_App'
+
+include ':app'
