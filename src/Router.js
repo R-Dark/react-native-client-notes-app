@@ -4,10 +4,11 @@ import LoginForm from './components/LoginForm'
 import ClientList from './components/ClientList'
 import NoteCreate from './components/NoteCreate'
 import NoteEdit from './components/NoteEdit'
+import ClientSearch from './components/ClientSearch'
 
 const RouterComponent = () => {
   return (
-    <Router>
+    <Router navigationBarStyle={styles.navBar} titleStyle={styles.navBarTitle} backButtonTextStyle={styles.barButtonTextStyle} barButtonIconStyle={styles.barButtonIconStyle}>
 
       <Scene key='root' hideNavBar={true}>
 
@@ -17,15 +18,20 @@ const RouterComponent = () => {
 
         <Scene key="main">
           <Scene
-            onRight={() => Actions.noteCreate()}
-            rightTitle='Add Note'
+            key='clientSearch'
+            rightTitle='Clients'
+            onRight={() => Actions.clientList()}
+            component={ClientSearch}
+            title='Search'
+            initial
+          />
+          <Scene
             key='clientList'
             component={ClientList}
             title='Clients'
-            initial
             />
           <Scene key='noteCreate' component={NoteCreate} title='Add Note' />
-          <Scene key='noteEdit' component={NoteEdit} title='Edit Note' />
+          <Scene key='noteEdit' component={NoteEdit} title='Client Details' />
         </Scene>
 
 
@@ -36,4 +42,18 @@ const RouterComponent = () => {
   );
 };
 
+styles = {
+navBar: {
+    backgroundColor:'#0D47A1',
+},
+navBarTitle:{
+    color:'#FFFFFF'
+},
+barButtonTextStyle:{
+    color:'#FFFFFF'
+},
+barButtonIconStyle:{
+    tintColor:'rgb(255,255,255)'
+}
+}
 export default RouterComponent

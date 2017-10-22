@@ -3,7 +3,8 @@ import { Actions } from 'react-native-router-flux'
 import {
   CLIENT_UPDATE,
   NOTE_CREATE,
-  CLIENTS_FETCH_SUCCESS
+  CLIENTS_FETCH_SUCCESS,
+  NOTE_SAVE_SUCCESS
 } from './types'
 
 
@@ -40,11 +41,13 @@ export const clientsFetch = () => {
 //this firebase call edits a specific key. pay attention to the uid
 export const noteSave = ({ name, notes, uid }) => {
   const { currentUser } = firebase.auth()
-  return () => {
+
+  return (dispatch) => {
     firebase.database().ref(`/users/${currentUser.uid}/client/${uid}`)
       .set({ name, notes })
-      .then(() => console.log('hello'))
-
+      .then(() => {
+        dispatch({ type: NOTE_SAVE_SUCCESS })
+        Actions.main({ type: 'reset' })
+    })
   }
-
 }

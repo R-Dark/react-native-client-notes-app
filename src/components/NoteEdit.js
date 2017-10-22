@@ -3,9 +3,11 @@ import _ from 'lodash'
 import NoteForm from "./NoteForm"
 import { connect } from 'react-redux'
 import { Card, CardSection, Button } from './common'
-import { clientUpdate, noteSave } from '../actions'
+import { clientUpdate, noteSave, noteDelete } from '../actions'
 
 class NoteEdit extends Component {
+  state = { showModal: false }
+
   componentWillMount() {
     _.each(this.props.client, (value, prop) => {
       this.props.clientUpdate({ prop, value })
@@ -18,14 +20,13 @@ class NoteEdit extends Component {
     this.props.noteSave({ name, notes, uid: this.props.client.uid})
   }
 
-
   render() {
     return(
       <Card>
         <NoteForm />
         <CardSection>
           <Button onPress={this.onButtonPress.bind(this)}>
-            Edit Note
+            Update
           </Button>
         </CardSection>
       </Card>

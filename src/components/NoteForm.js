@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput } from 'react-native'
-import { CardSection, Input } from './common'
+import { View, Text } from 'react-native'
+import { CardSection2, Input, Input2, CardSection } from './common'
 import { clientUpdate } from '../actions'
 import { connect } from 'react-redux'
 
@@ -9,32 +9,50 @@ class NoteForm extends Component {
   render() {
     return (
     <View>
-      <CardSection>
-        <Input
-          label="Name:"
-          placeholder="Jane"
-          value={this.props.name}
-          onChangeText={value => this.props.clientUpdate({ prop: 'name', value })}
-        />
-      </CardSection>
+        <CardSection>
+          <Text style={styles.labelStyle}>
+            Client:
+          </Text>
+          <Text style={styles.textStyle}>
+            {this.props.name}
+          </Text>
+        </CardSection>
 
-      <CardSection>
-        <Input
-          label="Note:"
+      <CardSection2>
+        <Text style={styles.noteLabelStyle}>
+          Notes:
+        </Text>
+        <Input2
           value={this.props.notes}
           onChangeText={value => this.props.clientUpdate({ prop: 'notes', value })}
         />
-      </CardSection>
+    </CardSection2>
     </View>
   )}
 }
 
 const styles = {
-  pickerTextStyle: {
+  labelStyle: {
     fontSize: 18,
     paddingLeft: 20,
+    paddingTop: 7,
+    paddingBottom: 7
+  },
+  textStyle: {
+    color: '#000',
+    fontSize: 18,
+    paddingTop: 7,
+    paddingBottom: 7,
+    paddingLeft: 10,
+    lineHeight: 23
+  },
+  noteLabelStyle: {
+    fontSize: 18,
+    paddingLeft: 20,
+    paddingTop: 7,
   }
-}
+};
+
 
 const mapStateToProps = (state) => {
   const { name, notes } = state.noteForm
